@@ -1,8 +1,8 @@
 ﻿namespace ServiceBasket.Models
 {
-    public class Basket
+    public class Order
     {
         public int Id { get; set; }
-        public List<QuantityProducts>? Products { get; set; }
+        public Dictionary<Product,int> Products { get; set; }
     }
 }
