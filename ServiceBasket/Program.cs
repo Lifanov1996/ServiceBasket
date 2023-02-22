@@ -7,7 +7,7 @@ builder.Services.AddControllers();
 
 var connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
 
-builder.Services.AddDbContext<ContextDB>(options => options.UseSqlServer(connectionString));
+builder.Services.AddDbContext<ContextDB>(options => options.UseSqlite(connectionString));
 
 
 builder.Services.AddEndpointsApiExplorer();
