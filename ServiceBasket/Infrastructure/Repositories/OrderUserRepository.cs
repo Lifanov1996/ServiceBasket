@@ -39,7 +39,7 @@ namespace ServiceBasket.Infrastructure.Repositories
                                                              (op, pr) => new
                                                              {
                                                                  op.OrderId,
-                                                                 op.AddOrderDT,
+                                                                 op.ProductId,
                                                                  pr.Name,
                                                                  pr.Price,
                                                                  op.Count
