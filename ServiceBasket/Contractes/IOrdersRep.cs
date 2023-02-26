@@ -3,15 +3,18 @@
 namespace ServiceBasket.Contractes
 {
     public interface IOrdersRep
-    {
-        Task<Order> GetOrderAsync(int orderId);
+    {      
+        /// <summary>
+        /// Получить список заказов
+        /// </summary>
+        /// <returns></returns>
+        Task<IEnumerable<Order>> GetAllOrdersAsync();
 
-        Task<IEnumerable<Order>> GetOrdersAsync();
-
-        Task<Order> AddOrderAsync(Product product);
-
-        Task<Order> AddProductsOrderAsync(int orderId, Product product);
-
-        Task<bool> DeleteOrderAsync(int orderId);
+        /// <summary>
+        /// Создание нового заказа
+        /// </summary>
+        /// <param name="order2Product"></param>
+        /// <returns></returns>
+        Task AddNewOrderProdAsync(Order2Product order2Product);
     }
 }

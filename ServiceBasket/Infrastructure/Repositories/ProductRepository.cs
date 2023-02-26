@@ -3,7 +3,7 @@ using ServiceBasket.Contractes;
 using ServiceBasket.Data;
 using ServiceBasket.Models;
 
-namespace ServiceBasket.Infrastructure
+namespace ServiceBasket.Infrastructure.Repositories
 {
     public class ProductRepository : IProductesRep
     {
@@ -15,18 +15,6 @@ namespace ServiceBasket.Infrastructure
         }
 
 
-        public async Task<Product> GetProductAsync(int productId)
-        {
-            var result = await _contextDb.Products.FindAsync(productId);
-            if(result == null)
-            {
-                throw new ArgumentNullException("The request failed. There is no data in the database for such parameters.");
-            }
-
-            return result;
-        }
-
-
         public async Task<IEnumerable<Product>> GetProductsAsync()
         {
             return await _contextDb.Products.AsNoTracking().ToListAsync();
@@ -35,6 +23,11 @@ namespace ServiceBasket.Infrastructure
 
         public async Task<Product> AddProductAsync(Product product)
         {
+            var isProduct = await _contextDb.Products.SingleOrDefaultAsync(x => x.Name == product.Name.ToUpper().Trim());
+            if (isProduct != null) 
+            {
+                throw new Exception("Товар с таким именем уже доступен");
+            }
             await _contextDb.Products.AddAsync(product);
             await _contextDb.SaveChangesAsync();
             return product;
@@ -44,9 +37,9 @@ namespace ServiceBasket.Infrastructure
         public async Task<bool> DeleteProductAsync(int productId)
         {
             var result = await _contextDb.Products.SingleOrDefaultAsync(x => x.Id == productId);
-            if(result == null )
+            if (result == null)
             {
-                throw new ArgumentNullException("The request failed. There is no data in the database for such parameters.");
+                throw new Exception("Товар не найден");
             }
 
             _contextDb.Products.Remove(result);

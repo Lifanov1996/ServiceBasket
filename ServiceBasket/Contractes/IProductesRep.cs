@@ -5,13 +5,6 @@ namespace ServiceBasket.Contractes
     public interface IProductesRep
     {
         /// <summary>
-        /// Получение одного товара 
-        /// </summary>
-        /// <param name="productId">Номер товара</param>
-        /// <returns></returns>
-        Task<Product> GetProductAsync(int productId);
-
-        /// <summary>
         /// Получение списка товаров
         /// </summary>
         /// <returns></returns>

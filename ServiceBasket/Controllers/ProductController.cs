@@ -6,7 +6,7 @@ using System.Net;
 
 namespace ServiceBasket.Controllers
 {
-    [Route("Product")]
+    [Route("Products")]
     [ApiController]
     public class ProductController : ControllerBase
     {
@@ -17,22 +17,10 @@ namespace ServiceBasket.Controllers
             _productes = productes;
         }
 
-
-        [HttpGet("{productId}")]
-        [ProducesResponseType(typeof(Product), (int)HttpStatusCode.OK)]
-        public async Task<ActionResult<Product>> GetAsync(int productId)
-        {
-            try
-            {
-                return Ok( await _productes.GetProductAsync(productId));
-            }
-            catch(Exception ex)
-            {
-                return BadRequest(ex.Message);
-            }
-        }
-
-
+        /// <summary>
+        /// Получение списка товаров
+        /// </summary>
+        /// <returns></returns>
         [HttpGet]
         [ProducesResponseType(typeof(Product), (int)HttpStatusCode.OK)]
         public async Task<ActionResult<Product>> GetAllProductsAsync()
@@ -47,8 +35,11 @@ namespace ServiceBasket.Controllers
             }
         }
 
-
-
+        /// <summary>
+        /// Добавление нового товара
+        /// </summary>
+        /// <param name="product"></param>
+        /// <returns></returns>
         [HttpPost]
         [ProducesResponseType(typeof(Product), (int)HttpStatusCode.OK)]
         public async Task<ActionResult<Product>> AddProductAsync(Product product)
@@ -63,9 +54,13 @@ namespace ServiceBasket.Controllers
             }
         }
 
-
+        /// <summary>
+        /// Удаление товара
+        /// </summary>
+        /// <param name="productId"></param>
+        /// <returns></returns>
         [HttpDelete("{productId}")]
-        [ProducesResponseType(typeof(Product), (int)HttpStatusCode.OK)]
+        [ProducesResponseType((int)HttpStatusCode.OK)]
         public async Task<ActionResult<bool>> DeletProductAsync(int productId)
         {
             try
