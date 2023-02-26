@@ -22,7 +22,7 @@ namespace ServiceBasket.Controllers
         /// </summary>
         /// <param name="orderId"></param>
         /// <returns></returns>
-        [HttpGet("orderId")]
+        [HttpGet("{orderId}")]
         [ProducesResponseType((int)HttpStatusCode.OK)]
         public async Task<ActionResult> GetOrderByAsync(int orderId)
         {
@@ -82,7 +82,7 @@ namespace ServiceBasket.Controllers
         /// </summary>
         /// <param name="orderId"></param>
         /// <returns></returns>
-        [HttpDelete("orderId")]
+        [HttpDelete("{orderId}")]
         [ProducesResponseType((int)HttpStatusCode.OK)]
         public async Task<ActionResult> DeletOrderAsync(int orderId)
         {
