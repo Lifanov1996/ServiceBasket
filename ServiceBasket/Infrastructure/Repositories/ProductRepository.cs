@@ -23,7 +23,7 @@ namespace ServiceBasket.Infrastructure.Repositories
 
         public async Task<Product> AddProductAsync(Product product)
         {
-            var isProduct = await _contextDb.Products.SingleOrDefaultAsync(x => x.Name == product.Name.ToUpper().Trim());
+            var isProduct = await _contextDb.Products.SingleOrDefaultAsync(x => x.Name.ToUpper().Trim() == product.Name.ToUpper().Trim());
             if (isProduct != null) 
             {
                 throw new Exception("Товар с таким именем уже доступен");
